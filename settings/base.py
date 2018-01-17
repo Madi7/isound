@@ -3,27 +3,17 @@ import sys
 from . import secret
 
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__), '..'
-    )
-)
-sys.path.append(BASE_DIR.replace('\\', '/'))
-sys.path.append(
-    os.path.join(BASE_DIR, 'apps').replace('\\', '/')
-)
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = secret.SECRET_KEY
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost'
-]
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db_isound',
+        'USER': secret.DB_USER,
+        'PASSWORD': secret.DB_PASSWORD,
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
+    }
+}
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,7 +32,58 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost'
+]
+# PATH - Project-Directory
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(PROJECT_DIR)
+
+# PATH - Apps
+sys.path.append(os.path.join(PROJECT_DIR, 'apps'))
+
+# PATH - Urls
 ROOT_URLCONF = 'urls.urls'
+
+# PATH - Static
+STATIC_URL = '/static/'
+
+# PATH - Media
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# PATH - WSGI
+WSGI_APPLICATION = 'isound.wsgi.application'
+
+# Develop = True | Production = False
+DEBUG = True
+
+# Shell+ Custom Imports
+SHELL_PLUS_PRE_IMPORTS = [
+    ('django.db.models', ('Avg', 'Count', 'Max', 'Min', 'F', 'Q', 'ExpressionWrapper', 'Case', 'Value', 'When', 'IntegerField', 'CharField', 'fields')),
+    ('django.contrib.auth.models', 'User'),
+    ('music.models', ('Album', 'Song')),
+]
+# REST_FrameWork & JSON Web Token Auth
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+# Localization
+LANGUAGE_CODE = 'ru-RU'
+TIME_ZONE = 'Asia/Almaty'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# OTHER
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -58,36 +99,9 @@ TEMPLATES = [
         },
     },
 ]
-WSGI_APPLICATION = 'isound.wsgi.application'
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': secret.DB_NAME,
-        'USER': secret.DB_USER,
-        'PASSWORD': secret.DB_PASSWORD,
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
-    }
-}
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
-LANGUAGE_CODE = 'ru-RU'
-TIME_ZONE = 'Asia/Almaty'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
-
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
