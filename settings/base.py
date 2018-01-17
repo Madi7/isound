@@ -15,12 +15,17 @@ DATABASES = {
     }
 }
 INSTALLED_APPS = [
+    'django.contrib.contenttypes',
+    #'grappelli.dashboard',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'rest_framework',
+    'debug_toolbar',
     'music.apps.MusicConfig'
 ]
 MIDDLEWARE = [
@@ -31,11 +36,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost'
 ]
+ADMINS = [
+    ('Madi', 'madi7maratovic@gmail.com')
+]
+CSRF_COOKIE_SECURE = False
+
 # PATH - Project-Directory
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(PROJECT_DIR)
@@ -60,12 +71,13 @@ WSGI_APPLICATION = 'isound.wsgi.application'
 DEBUG = True
 
 # Shell+ Custom Imports
+SHELL_PLUS = 'plain'
 SHELL_PLUS_PRE_IMPORTS = [
     ('django.db.models', ('Avg', 'Count', 'Max', 'Min', 'F', 'Q', 'ExpressionWrapper', 'Case', 'Value', 'When', 'IntegerField', 'CharField', 'fields')),
     ('django.contrib.auth.models', 'User'),
     ('music.models', ('Album', 'Song')),
 ]
-# REST_FrameWork & JSON Web Token Auth
+# REST_FrameWork & JSON-Web-Token-Auth
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
