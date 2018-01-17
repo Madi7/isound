@@ -1,2 +1,2 @@
 # isound
-Django Project on MongoDB
+Django 2.0 Project on PostGreSQL
