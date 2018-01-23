@@ -1,32 +1,25 @@
 import os
 import sys
-from . import secret
 
 
-SECRET_KEY = secret.SECRET_KEY
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_isound',
-        'USER': secret.DB_USER,
-        'PASSWORD': secret.DB_PASSWORD,
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
-    }
-}
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(PROJECT_DIR)
+sys.path.append(os.path.join(PROJECT_DIR, 'apps'))
+
 INSTALLED_APPS = [
-    'django.contrib.contenttypes',
-    #'grappelli.dashboard',
-    'grappelli',
-    'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    #'grappelli.dashboard',
+    'grappelli',
+    'django.contrib.admin',
     'rest_framework',
-    'debug_toolbar',
-    'music.apps.MusicConfig'
+    'rest_framework.authtoken',
+    'django_rq',
+    'music.apps.MusicConfig',
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -36,48 +29,29 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost'
-]
-ADMINS = [
-    ('Madi', 'madi7maratovic@gmail.com')
-]
-CSRF_COOKIE_SECURE = False
-
-# PATH - Project-Directory
-PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(PROJECT_DIR)
-
-# PATH - Apps
-sys.path.append(os.path.join(PROJECT_DIR, 'apps'))
-
-# PATH - Urls
-ROOT_URLCONF = 'urls.urls'
-
-# PATH - Static
-STATIC_URL = '/static/'
-
-# PATH - Media
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
-MEDIA_URL = '/media/'
-
-# PATH - WSGI
-WSGI_APPLICATION = 'isound.wsgi.application'
-
-# Develop = True | Production = False
-DEBUG = True
-
-# Shell+ Custom Imports
-SHELL_PLUS = 'plain'
-SHELL_PLUS_PRE_IMPORTS = [
-    ('django.db.models', ('Avg', 'Count', 'Max', 'Min', 'F', 'Q', 'ExpressionWrapper', 'Case', 'Value', 'When', 'IntegerField', 'CharField', 'fields')),
-    ('django.contrib.auth.models', 'User'),
-    ('music.models', ('Album', 'Song')),
-]
-# REST_FrameWork & JSON-Web-Token-Auth
+# RQ-WORKER
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 360,
+    },
+    'high': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 720,
+    },
+    'low': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        'DEFAULT_TIMEOUT': 180,
+    }
+}
+# REST-FRAMEWORK & JSON-WEB-TOKEN-AUTH
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -88,13 +62,19 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
-# Localization
+# SHELL_PLUS
+SHELL_PLUS = 'plain'
+SHELL_PLUS_PRE_IMPORTS = [
+    ('django.db.models', ('Avg', 'Count', 'Max', 'Min', 'F', 'Q', 'ExpressionWrapper', 'Case', 'Value', 'When', 'IntegerField', 'CharField', 'fields')),
+    ('django.contrib.auth.models', 'User'),
+    ('music.models', ('Album', 'Song')),
+]
+# LOCALIZATION
 LANGUAGE_CODE = 'ru-RU'
 TIME_ZONE = 'Asia/Almaty'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
 # OTHER
 TEMPLATES = [
     {
@@ -117,3 +97,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
+ADMINS = (
+    ('Madi', 'madi7maratovic@gmail.com'),
+)
+MANAGERS = ADMINS
+SECRET_KEY = 'b!qj!+25@dl-95-@$^h&apvirro(7_zb8fp3r$y74vk(-d*kv!'
+# PATH
+ROOT_URLCONF = 'urls.urls'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
+WSGI_APPLICATION = 'isound.wsgi.application'

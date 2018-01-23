@@ -1,36 +1,14 @@
 # Django
 Django==2.0.1
 
-# Django-Extensions (Shell+)
+# Django-Extensions (Shell_Plus)
 django-extensions==1.9.9
+ipython==6.2.1
 typing==3.6.2
 
 # Debugging-Tools
 django-debug-toolbar==1.9.1
 ipdb==0.10.3
 
-# Django-REST-FrameWork
-djangorestframework==3.7.7
-
-# Django-REST-FrameWork (Optional)
-markdown==2.6.11
-PyYAML==3.12
-django-filter==1.1.0
-
-# JSON-Web-Auth-Token
-djangorestframework-jwt==1.11.0
-PyJWT==1.5.3
-
 # Grapelli (Admin-InterFace)
 django-grappelli==2.10.1
-
-# PostGreSQL (Primary-DB)
-psycopg2==2.7.3.2
-
-
-# MongoDB (Secondary-DB)
-pymongo==3.6.0
-mongoengine==0.15.0
-django-mongodb-engine==0.6.0
-# DjangoToolBox (For MongoDB)
-djangotoolbox==1.8.0

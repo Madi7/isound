@@ -1,0 +1,10 @@
+# PostGreSQL (Primary-DB)
+psycopg2==2.7.3.2
+
+# MongoDB (Secondary-DB)
+pymongo==3.6.0
+mongoengine==0.15.0
+django-mongodb-engine==0.6.0
+
+# DjangoToolBox (For-MongoDB)
+djangotoolbox==1.8.0

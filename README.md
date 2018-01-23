@@ -1,2 +1,2 @@
 # isound
-Django 2.0 Project on PostGreSQL
+Simple Django-2.0 Project
