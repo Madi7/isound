@@ -7,13 +7,18 @@ from django.urls import path, include
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
-    path('', include('music.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('django-rq/', include('django_rq.urls')),
 ]
+# Project
+urlpatterns += [
+    path('', include('music.urls')),
+]
+# Media
 urlpatterns += static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
+# Debug-Toolbar
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
