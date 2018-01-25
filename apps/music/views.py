@@ -18,7 +18,7 @@ def create_album(request):
         if form.is_valid():
             album = form.save(commit=False)
             album.user = request.user
-            album.album_logo = request.FILES['album_logo']
+            album.album_logo = request.FILES['logo']
             file_type = album.album_logo.url.split('.')[-1]
             file_type = file_type.lower()
             if file_type not in IMAGE_FILE_TYPES:
@@ -42,7 +42,7 @@ def create_song(request, album_id):
     if form.is_valid():
         albums_songs = album.song_set.all()
         for s in albums_songs:
-            if s.song_title == form.cleaned_data.get("song_title"):
+            if s.song_title == form.cleaned_data.get("title"):
                 context = {
                     'album': album,
                     'form': form,

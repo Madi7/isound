@@ -1,0 +1,14 @@
+# Python3
+sudo apt-get install python3
+
+# pip3 (for-Python3)
+sudo apt-get install python3-pip
+
+# VirtualEnvWrapper
+pip3 install virtualenvwrapper
+
+# EasyInstall
+sudo apt-get install python-setuptools
+
+# Redis-Server
+sudo apt-get install redis-server
