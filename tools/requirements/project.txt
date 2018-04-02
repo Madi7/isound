@@ -1,28 +1,23 @@
 #==================================================|
 # Django
 Django>=2.0.2
-
 # Django-Extensions (Shell+)
 django-extensions>=1.9.9
 ipython>=6.2.1
 typing>=3.6.2
-
 # Debugging-Tools
 django-debug-toolbar>=1.9.1
 ipdb>=0.10.3
-
 # Grappelli (Admin-InterFace)
 django-grappelli>=2.10.1
 
 #==================================================|
 # REST-FrameWork
 djangorestframework>=3.7.7
-
 # REST-FrameWork (Optional)
 django-filter>=1.1.0
 markdown>=2.6.11
 PyYAML>=3.12
-
 # JSON-Web-Auth-Token
 djangorestframework-jwt>=1.11.0
 PyJWT>=1.5.3
@@ -36,11 +31,9 @@ rq>=0.10.0
 #==================================================|
 # PostGreSQL (Primary-DB)
 psycopg2>=2.7.3.2
-
 # MongoDB (Secondary-DB)
 pymongo>=3.6.0
 mongoengine>=0.15.0
 django-mongodb-engine>=0.6.0
-
 # DjangoToolBox (For-MongoDB)
 djangotoolbox>=1.8.0

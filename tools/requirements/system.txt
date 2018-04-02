@@ -1,13 +1,10 @@
 #|====================================================================================================|
 #|Python3:
 sudo apt-get install python3
-
 #|PIP3:
 sudo apt-get install python3-pip
-
 #|EasyInstall:
 sudo apt-get install python-setuptools
-
 
 #|====================================================================================================|
 #|Redis-Server:

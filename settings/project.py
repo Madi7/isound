@@ -13,7 +13,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    #'grappelli.dashboard',
+    'grappelli.dashboard',
     'grappelli',
     'django.contrib.admin',
     'rest_framework',
